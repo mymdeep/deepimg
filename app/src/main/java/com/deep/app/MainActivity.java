@@ -4,9 +4,8 @@ import java.io.File;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.deep.imagelib.DeepImage;
 import com.deep.imagelib.beans.CompressStyle;
 import com.deep.imagelib.beans.ImageConfigure;
 import com.deep.imagelib.beans.ImageConfigure.Expect;
-import com.deep.imagelib.log.Logger;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView img;
@@ -29,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bitmap bitmap = BitmapFactory.decodeResource( MainActivity.this.getResources(), R.drawable.datu);
-                DeepImage deepImage = new DeepImage(MainActivity.this,bitmap,null);
+                ImageConfigure configure = new ImageConfigure();
+                configure.directoryname = "/sdcard/android";//目录名
+                configure.filename = "beautiful.jpg";//文件名
+                DeepImage deepImage = new DeepImage(MainActivity.this,bitmap,configure);
                 message.setText("图片保存路径为："+deepImage.asFile().getAbsolutePath()+" 源文件大小："+bitmap.getByteCount()+"  文件大小："+deepImage.asFile().length());
 
             }
